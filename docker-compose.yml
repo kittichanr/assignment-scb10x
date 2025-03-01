@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    container_name: postgres_scb10x
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=scb10x
+    volumes:
+      - db:/var/lib/postgresql/
+    ports:
+      - 5432:5432
+volumes:
+  db:
