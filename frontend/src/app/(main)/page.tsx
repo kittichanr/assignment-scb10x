@@ -3,7 +3,7 @@ import { apiFetch } from "@/libs/api"
 import Image from "next/image"
 
 export default async function Home() {
-  const updatedProfile = await apiFetch("/api/dashboard", {}, true)
+  const updatedProfile = await apiFetch("chat", {}, true)
   console.log("Updated Profile:", updatedProfile)
 
   return (

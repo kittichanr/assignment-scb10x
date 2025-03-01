@@ -15,6 +15,7 @@ export const authOptions: NextAuthConfig = {
         token.id = user.id
         token.accessToken = user.access_token
         token.email = user.email
+        token.name = user.name
       }
       return token
     },
@@ -25,6 +26,7 @@ export const authOptions: NextAuthConfig = {
         if (session.user) {
           session.user.email = String(token.email)
           session.user.id = String(token.id)
+          session.user.name = String(token.name)
         }
       }
       return session

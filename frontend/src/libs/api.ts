@@ -28,6 +28,8 @@ export async function apiFetch(
     headers,
   })
 
+  console.log("test", headers)
+
   if (!res) {
     throw new Error(`API error: ${res}`)
   }

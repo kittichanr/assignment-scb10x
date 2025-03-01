@@ -20,7 +20,7 @@ export default function SignUpPage() {
   const [error, setError] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
 
-  const { back } = useRouter()
+  const { replace } = useRouter()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (error) {
@@ -35,7 +35,7 @@ export default function SignUpPage() {
     event.preventDefault()
 
     try {
-      const response = await fetch(`/api/register`, {
+      const response = await fetch(`http://127.0.0.1:5000/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export default function SignUpPage() {
 
       if (response.ok) {
         toast.success("อีเมลถูกสร้างสำเร็จ!")
-        back()
+        replace("/sign-in")
       } else {
         const errorData = await response.json()
         setError(true)
