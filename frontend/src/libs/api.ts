@@ -1,5 +1,6 @@
 import { auth } from "@/auth"
 import { getSession } from "next-auth/react"
+import { redirect } from "next/navigation"
 
 export async function apiFetch(
   endpoint: string,
@@ -10,7 +11,6 @@ export async function apiFetch(
 
   if (isServer) {
     const session = await auth()
-
     token = session?.accessToken
   } else {
     const session = await getSession()
@@ -28,7 +28,9 @@ export async function apiFetch(
     headers,
   })
 
-  console.log("test", headers)
+  if (res.status === 401) {
+    redirect("/sign-out")
+  }
 
   if (!res) {
     throw new Error(`API error: ${res}`)

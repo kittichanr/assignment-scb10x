@@ -1,3 +1,5 @@
+import Navbar from "@/components/layout/Navbar"
+
 export default function LobbyLayout({
   children,
 }: {
@@ -5,7 +7,7 @@ export default function LobbyLayout({
 }) {
   return (
     <div>
-      {" "}
+      <Navbar />
       <div>{children}</div>
     </div>
   )

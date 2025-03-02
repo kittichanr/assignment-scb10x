@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 # Configuration for PostgreSQL connection
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "postgresql://postgres:password@localhost:5432/scb10x"
+    "postgresql://postgres:password@localhost:5432/llm"
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["JWT_SECRET_KEY"] = (
