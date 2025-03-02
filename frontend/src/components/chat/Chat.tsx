@@ -1,16 +1,26 @@
 import Image from "next/image"
 import React from "react"
+import UserMessage from "./UserMessage"
+import AIMessage from "./AIMessage"
 
 export const Chat = () => {
   return (
-    <div className="h-full">
+    <div className=" h-[calc(100vh-180px)] flex flex-col">
+      {/* Chat Header */}
       <div className="text-white text-2xl mb-4">
         Chat{" "}
         <span className="text-[#7C7E89] ml-2 rounded-2xl bg-[#121215] text-sm p-2">
           model
         </span>
       </div>
-      <div className="bg-[#121215] rounded-2xl h-[80%] mb-4 "></div>
+
+      <div className="bg-[#121215] rounded-2xl flex-1 overflow-y-auto scrollbar-hide p-4 mb-4">
+        <UserMessage />
+        {[...Array(30)].map((_, i) => (
+          <AIMessage key={i} />
+        ))}
+      </div>
+
       <div className="flex flex-row">
         <div className="bg-[#121215] rounded-3xl mr-2 content-center flex-1 p-2">
           <input
