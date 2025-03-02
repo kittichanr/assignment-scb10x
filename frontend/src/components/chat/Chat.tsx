@@ -1,16 +1,23 @@
+"use client"
+
 import Image from "next/image"
 import React from "react"
 import UserMessage from "./UserMessage"
 import AIMessage from "./AIMessage"
+import { useLlmModel } from "@/providers/LLMModelProvider"
+import { useSliderControls } from "@/providers/SliderControlsProvider"
 
 export const Chat = () => {
+  const { selectedModel } = useLlmModel()
+  const { outputLength, temperature, topP, topK, repetitionPenalty } =
+    useSliderControls()
+
   return (
     <div className=" h-[calc(100vh-180px)] flex flex-col">
-      {/* Chat Header */}
       <div className="text-white text-2xl mb-4">
         Chat{" "}
         <span className="text-[#7C7E89] ml-2 rounded-2xl bg-[#121215] text-sm p-2">
-          model
+          {selectedModel}
         </span>
       </div>
 

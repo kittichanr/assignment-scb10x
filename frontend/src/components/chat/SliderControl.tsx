@@ -1,12 +1,19 @@
 "use client"
-import { useState } from "react"
+import { useSliderControls } from "@/providers/SliderControlsProvider"
 
 export default function SliderControls() {
-  const [outputLength, setOutputLength] = useState(512)
-  const [temperature, setTemperature] = useState(0.7)
-  const [topP, setTopP] = useState(0.7)
-  const [topK, setTopK] = useState(50)
-  const [repetitionPenalty, setRepetitionPenalty] = useState(1)
+  const {
+    outputLength,
+    setOutputLength,
+    temperature,
+    setTemperature,
+    topP,
+    setTopP,
+    topK,
+    setTopK,
+    repetitionPenalty,
+    setRepetitionPenalty,
+  } = useSliderControls()
 
   return (
     <div className="  text-white rounded-lg shadow-md space-y-4">
@@ -20,8 +27,8 @@ export default function SliderControls() {
         </label>
         <input
           type="range"
-          min="100"
-          max="1024"
+          min="150"
+          max="8192"
           value={outputLength}
           onChange={(e) => setOutputLength(Number(e.target.value))}
           className="w-full accent-[#726BDF] bg-[#121215]"
@@ -40,7 +47,7 @@ export default function SliderControls() {
           type="range"
           min="0"
           max="1"
-          step="0.01"
+          step="0.1"
           value={temperature}
           onChange={(e) => setTemperature(Number(e.target.value))}
           className="w-full accent-[#726BDF]"
@@ -59,7 +66,7 @@ export default function SliderControls() {
           type="range"
           min="0"
           max="1"
-          step="0.01"
+          step="0.1"
           value={topP}
           onChange={(e) => setTopP(Number(e.target.value))}
           className="w-full accent-[#726BDF]"
