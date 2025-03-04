@@ -10,7 +10,7 @@ init:
 	$(ACTIVATE) && flask db upgrade
 
 run:
-	FLASK_DEBUG=1 flask run
+	$(ACTIVATE) && FLASK_DEBUG=1 flask run
 
 clean:
 	rm -rf $(VENV)
