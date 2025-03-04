@@ -4,6 +4,7 @@ import React from "react"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
+import Image from "next/image"
 
 type SignInInput = {
   name: string
@@ -35,17 +36,20 @@ export default function SignUpPage() {
     event.preventDefault()
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: inputs.name,
-          email: inputs.email,
-          password: inputs.password,
-        }),
-      })
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: inputs.name,
+            email: inputs.email,
+            password: inputs.password,
+          }),
+        }
+      )
 
       if (response.ok) {
         toast.success("อีเมลถูกสร้างสำเร็จ!")
@@ -63,8 +67,14 @@ export default function SignUpPage() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 bg-gradient-to-b from-[#121215] via-[#121215] to-[#12121533]">
+      <Image
+        alt="typhoon_logo"
+        src="/images/typhoon-logo.png"
+        width={125}
+        height={125}
+      />
+      <div className="w-full mt-8 max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-900">
           Sign Up
         </h2>

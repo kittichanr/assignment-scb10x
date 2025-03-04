@@ -3,6 +3,7 @@
 import React, { use } from "react"
 import { signIn } from "next-auth/react"
 import { ChangeEvent, FormEvent, useState } from "react"
+import Image from "next/image"
 
 type SignInInput = {
   email: string
@@ -36,8 +37,14 @@ export default function SignInPage(props: PageProps) {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#121215] via-[#121215] to-[#12121533]">
+      <Image
+        alt="typhoon_logo"
+        src="/images/typhoon-logo.png"
+        width={125}
+        height={125}
+      />
+      <div className="w-full mt-8  max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-900">
           Sign In
         </h2>

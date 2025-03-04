@@ -8,7 +8,6 @@ export async function apiFetch(
   isServer?: boolean
 ) {
   let token: string | undefined
-
   if (isServer) {
     const session = await auth()
     token = session?.accessToken
@@ -23,10 +22,13 @@ export async function apiFetch(
     ...options.headers,
   }
 
-  const res = await fetch(`http://127.0.0.1:5000/${endpoint}`, {
-    ...options,
-    headers,
-  })
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/${endpoint}`,
+    {
+      ...options,
+      headers,
+    }
+  )
 
   if (res.status === 401) {
     redirect("/sign-out")

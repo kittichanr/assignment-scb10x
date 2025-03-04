@@ -59,8 +59,6 @@ export default function useChatStream(sessionId?: string) {
     let tokenCount = 0
     let responseTime = 0
 
-    let messageId = ""
-
     while (true) {
       const { done, value } = await reader.read()
       if (done) break
@@ -90,16 +88,13 @@ export default function useChatStream(sessionId?: string) {
           responseTime = response_time
           sessionID = session_id
           likeStatus = like_status
-          messageId = id
 
           setMessages((prevMessages: any) => {
             const messageExists = prevMessages.some(
-              (message) => message.id === id
+              (message: any) => message.id === id
             )
 
             if (!messageExists) {
-              console.log("Test1")
-
               return [
                 ...prevMessages,
                 {
@@ -113,9 +108,7 @@ export default function useChatStream(sessionId?: string) {
                 },
               ]
             } else {
-              console.log("Test2")
-
-              return prevMessages.map((msg) =>
+              return prevMessages.map((msg: any) =>
                 msg.id === id
                   ? {
                       ...msg,
@@ -135,24 +128,6 @@ export default function useChatStream(sessionId?: string) {
       }
     }
 
-    // const finalMessage = {
-    //   id: messageId,
-    //   role: "assistant",
-    //   content: aiMessage,
-    //   sessionId: sessionID,
-    //   like_status: likeStatus,
-    //   response_time: responseTime,
-    //   token_count: tokenCount,
-    // }
-
-    // setMessages((prevMessages) =>
-    //   prevMessages.map((msg) => {
-    //     return msg.id === messageId ? finalMessage : msg
-    //   })
-    // )
-
-    // setMessages((prevMessages: any) => [...prevMessages, finalMessage])
-
     setIsLoading(false)
   }
 
@@ -164,14 +139,17 @@ export default function useChatStream(sessionId?: string) {
     const session = await getSession()
     const token = session?.accessToken
 
-    const response = await fetch("http://localhost:3000/api/chat/regenerate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(message),
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_URL}/api/chat/regenerate`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(message),
+      }
+    )
 
     const reader = response.body?.getReader()
     if (!reader) return
